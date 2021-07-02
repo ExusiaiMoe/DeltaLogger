@@ -23,6 +23,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Time;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.*;
 
 public class ModInit implements DedicatedServerModInitializer {
@@ -111,5 +114,12 @@ public class ModInit implements DedicatedServerModInitializer {
 		ServerLifecycleEvents.SERVER_STOPPED.register(this::onStop);
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> Commands.register(dispatcher));
+
+		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
+//		System.out.println(TimeZone.getTimeZone("Asia/Shanghai").getID());
+//		System.out.println(ZoneId.systemDefault());
+//		System.out.println(ZoneOffset.systemDefault());
+//		System.out.println(ZoneId.of("UTC"));
+//		System.out.println(ZoneOffset.UTC);
 	}
 }

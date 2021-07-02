@@ -14,8 +14,8 @@ public class SQLUtils {
 	public static ZoneId zoneId;
 
 	static {
-		zoneId = ZoneId.of("UTC");
-		timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneOffset.UTC);
+		zoneId = ZoneId.systemDefault();
+		timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneOffset.systemDefault());
 	}
 
 	/**

@@ -1,6 +1,6 @@
 plugins {
     id 'fabric-loom' version '0.6-SNAPSHOT'
-    id 'com.github.johnrengelman.shadow' version '5.2.0'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
     id 'maven-publish'
 }
 
@@ -10,8 +10,8 @@ repositories {
     }
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
 
 archivesBaseName = project.archives_base_name
 version = project.minecraft_version + '-' + project.mod_version
@@ -47,7 +47,7 @@ dependencies {
 
     shadow('org.slf4j:slf4j-simple:1.7.30')
     include 'org.slf4j:slf4j-api:1.8.0-beta4'
-    compile "org.slf4j:slf4j-simple:1.8.0-beta4"
+    implementation "org.slf4j:slf4j-simple:1.8.0-beta4"
 
     implementation(shadow('io.vavr:vavr:0.10.3'))
 
@@ -62,14 +62,12 @@ dependencies {
 }
 processResources {
     inputs.property "version", project.version
-    from(sourceSets.main.resources.srcDirs) {
-        include "fabric.mod.json"
+
+    filesMatching("fabric.mod.json") {
         expand "version": project.version
     }
-    from(sourceSets.main.resources.srcDirs) {
-        exclude "fabric.mod.json"
-    }
 }
+
 // ensure that the encoding is set to UTF-8, no matter what the system default is
 // this fixes some edge cases with special characters not displaying correctly
 // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
